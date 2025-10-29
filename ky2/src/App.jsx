@@ -3,7 +3,7 @@ import WritingPrompt from './components/WritingPrompt';
 import WritingEditor from './components/WritingEditor';
 import AIFeedback from './components/AIFeedback';
 import HistoryPanel from './components/HistoryPanel';
-import { analyzeEssay } from './services/openaiService';
+import { analyzeEssay, generateRandomPrompt } from './services/openaiService';
 
 function App() {
   const [essay, setEssay] = useState('');
@@ -74,29 +74,19 @@ function App() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleNewPrompt = () => {
-    const prompts = [
-      {
-        title: 'IELTS Writing Task 2',
-        description: 'You should spend about 40 minutes on this task.',
-        prompt: 'Some people believe that unpaid community service should be a compulsory part of high school programmes (for example working for a charity, improving the neighbourhood or teaching sports to younger children).\n\nTo what extent do you agree or disagree?\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words.'
-      },
-      {
-        title: 'IELTS Writing Task 2',
-        description: 'You should spend about 40 minutes on this task.',
-        prompt: 'Many people believe that social networking sites (such as Facebook) have had a huge negative impact on both individuals and society.\n\nTo what extent do you agree or disagree?\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words.'
-      },
-      {
-        title: 'IELTS Writing Task 2',
-        description: 'You should spend about 40 minutes on this task.',
-        prompt: 'Some people think that the government should fund music, dance, and arts lessons for children. Others think that they should be funded by private businesses or by children\'s families.\n\nDiscuss both views and give your own opinion.\n\nGive reasons for your answer and include any relevant examples from your own knowledge or experience.\n\nWrite at least 250 words.'
-      }
-    ];
-
-    const randomPrompt = prompts[Math.floor(Math.random() * prompts.length)];
-    setCurrentPrompt(randomPrompt);
-    setEssay('');
-    setFeedback(null);
+  const handleNewPrompt = async () => {
+    try {
+      setIsLoading(true);
+      const promptObj = await generateRandomPrompt();
+      setCurrentPrompt(promptObj);
+      setEssay('');
+      setFeedback(null);
+    } catch (e) {
+      alert(`Không tạo được đề mới: ${e.message}`);
+      console.error(e);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
