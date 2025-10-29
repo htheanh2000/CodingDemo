@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   # Kỳ 1: Snake Game (Static HTML)
   ky1-snake:
