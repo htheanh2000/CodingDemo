@@ -1,110 +1,102 @@
-# 🚀 CodingDemo - Tổng Hợp 3 Dự Án Full Stack
+# 🎓 Coding Demo - 3 Kỳ Học
 
-Collection của 3 dự án học tập từ cơ bản đến nâng cao, từ frontend vanilla JavaScript đến full-stack MERN với AI integration.
+Repository demo code cho 3 kỳ học lập trình web từ cơ bản đến full-stack.
 
-## 📚 Giới Thiệu
+## 📚 3 Kỳ Học
 
-Đây là 3 dự án được phát triển qua các kỳ học:
+### Kỳ 1: Snake Game (HTML/CSS/JavaScript)
+- Tech Stack: HTML5, CSS3, JavaScript vanilla
+- Canvas API để vẽ game
+- LocalStorage để lưu high score
+- Link: http://31.97.109.177:3005
 
-1. **Kỳ 1**: Snake Game - Game cổ điển với vanilla JavaScript
-2. **Kỳ 2**: IELTS Writing Practice - Ứng dụng luyện viết với AI feedback
-3. **Kỳ 3**: Expense Tracker - Ứng dụng quản lý chi tiêu với RAG và AI OCR
+### Kỳ 2: IELTS Writing Practice (React + AI)
+- Tech Stack: React, Tailwind CSS, OpenAI API
+- AI chấm điểm bài viết IELTS
+- LocalStorage để lưu lịch sử
+- Link: http://31.97.109.177:3006
 
-## 🎮 Kỳ 1: Snake Game
+### Kỳ 3: Expense Tracker (Full Stack MERN + AI)
+- Tech Stack: React, Node.js, MongoDB, OpenAI
+- Upload invoice và AI extract data
+- RAG search với embeddings
+- Backend: http://31.97.109.177:3008
+- Frontend: http://31.97.109.177:3007
 
-Game Snake cổ điển được xây dựng với HTML5 Canvas và Tailwind CSS.
+## 🚀 Deploy
 
-**Tech Stack:**
-- Vanilla JavaScript
-- HTML5 Canvas API
-- Tailwind CSS
-- LocalStorage API
+Xem chi tiết tại [DEPLOY.md](DEPLOY.md)
 
-**Tính năng:**
-- Điều khiển rắn bằng phím mũi tên
-- Lưu điểm cao nhất
-- Game over screen với animation
-- Giao diện đẹp mắt
+### Quick Start trên VPS:
 
-**Cách chạy:**
-Mở file `ky1/snake-game.html` trực tiếp trong trình duyệt.
-
-## 📝 Kỳ 2: IELTS Writing Practice
-
-Ứng dụng giúp luyện viết IELTS Writing Task 2 với AI chấm điểm chi tiết theo đúng tiêu chí IELTS.
-
-**Tech Stack:**
-- React 19
-- Vite
-- Tailwind CSS
-- OpenAI GPT-4o-mini API
-
-**Tính năng:**
-- Chấm điểm theo 4 tiêu chí IELTS
-- Phân tích chi tiết và gợi ý cải thiện
-- Lịch sử làm bài
-- Đề bài IELTS mẫu
-
-**Cách chạy:**
 ```bash
-cd ky2
-npm install
-# Tạo file .env với VITE_OPENAI_API_KEY
-npm run dev
+# Clone repository
+git clone https://github.com/htheanh2000/CodingDemo.git
+cd CodingDemo
+
+# Tạo file .env
+cp env.example .env
+nano .env  # Thêm OPENAI_API_KEY=sk-your-key-here
+
+# Build và chạy
+docker-compose up -d --build
 ```
 
-## 💰 Kỳ 3: Expense Tracker
+## 🔧 Troubleshooting
 
-Ứng dụng quản lý chi tiêu full-stack với AI OCR, RAG search, và dashboard thống kê.
+### OpenAI API Key Error
+Nếu gặp lỗi 401 với OpenAI API:
+- Xem [QUICK_FIX_API_KEY.md](QUICK_FIX_API_KEY.md) - Hướng dẫn nhanh
+- Xem [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Chi tiết đầy đủ
 
-**Tech Stack:**
-- **Backend**: Node.js, Express, MongoDB, JWT, OpenAI API
-- **Frontend**: React 19, Tailwind CSS, Recharts
-- **AI Features**: GPT-4o Vision (OCR), Text Embeddings (RAG)
+### Scripts hỗ trợ:
 
-**Tính năng:**
-- Authentication với JWT
-- Upload hóa đơn và AI tự động OCR
-- RAG search để tìm hóa đơn tương tự
-- Dashboard với charts thống kê
-- Quản lý expenses với CRUD đầy đủ
-
-**Cách chạy:**
-
-Backend:
 ```bash
-cd ky3/backend
-npm install
-# Tạo .env với MONGODB_URI, JWT_SECRET, OPENAI_API_KEY
-npm run dev
+# Kiểm tra cấu hình env
+./check-env.sh
+
+# Tự động fix lỗi API key
+./fix-api-key.sh
 ```
 
-Frontend:
-```bash
-cd ky3/frontend
-npm install
-npm run dev
+## 📁 Cấu trúc
+
+```
+CodingDemo/
+├── ky1/              # Snake Game (Static HTML)
+├── ky2/              # IELTS Writing Practice (React)
+├── ky3/              # Expense Tracker (Full Stack)
+│   ├── backend/      # Node.js + Express + MongoDB
+│   └── frontend/     # React + Tailwind
+├── docker-compose.yml
+├── env.example       # Template cho biến môi trường
+└── README.md         # File này
 ```
 
-## 🛠️ Tech Stack Tổng Quan
+## 📖 Tài liệu
 
-- **Frontend**: HTML5, CSS3, JavaScript (ES6+), React 19, Tailwind CSS
-- **Backend**: Node.js, Express.js, MongoDB, Mongoose
-- **Authentication**: JWT, bcryptjs
-- **AI Integration**: OpenAI API (GPT-4o, GPT-4o-mini, Embeddings)
-- **Build Tools**: Vite
-- **Data Visualization**: Recharts
-- **File Upload**: Multer
+- [DEPLOY.md](DEPLOY.md) - Hướng dẫn deploy chi tiết
+- [TROUBLESHOOTING.md](TROUBLESHOOTING.md) - Troubleshooting
+- [QUICK_FIX_API_KEY.md](QUICK_FIX_API_KEY.md) - Fix nhanh lỗi API key
+- [ky2/README.md](ky2/README.md) - Chi tiết về kỳ 2
+- [ky3/README.md](ky3/README.md) - Chi tiết về kỳ 3
 
-## 📖 Chi Tiết
+## 🔑 Environment Variables
 
-Xem file [DU_AN_3_KY.md](./DU_AN_3_KY.md) để biết chi tiết đầy đủ về từng dự án.
+Tạo file `.env` ở root với:
 
-## 📝 License
+```env
+OPENAI_API_KEY=sk-your-openai-api-key-here
+MONGODB_URI=mongodb://mongodb:27017/expense-tracker
+JWT_SECRET=your_secret_key
+PORT=3008
+```
 
-MIT License
+Xem chi tiết tại `env.example`
 
-## 👤 Tác giả
+## 📝 Notes
 
-Sophie - htheanh2000@gmail.com
-
+- Ky2 và Ky3 **cần OPENAI_API_KEY** trong file `.env` ở root
+- Ky2: API key được build vào static files (build time)
+- Ky3: API key được inject vào container (runtime)
+- Sau khi sửa `.env`, **bắt buộc** rebuild containers
