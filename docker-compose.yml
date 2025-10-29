@@ -16,6 +16,8 @@ services:
     build:
       context: ./ky2
       dockerfile: Dockerfile
+      args:
+        - VITE_OPENAI_API_KEY=${OPENAI_API_KEY}
     container_name: codingdemo-ky2
     ports:
       - "3006:80"
