@@ -14,7 +14,7 @@
     
     # Cài deps trước để tận dụng cache
     COPY package*.json ./
-    RUN npm ci
+        RUN npm install
     
     # Copy source
     COPY . .
