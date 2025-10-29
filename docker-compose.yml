@@ -1,0 +1,81 @@
+version: '3.8'
+
+services:
+  # Kỳ 1: Snake Game (Static HTML)
+  ky1-snake:
+    build:
+      context: ./ky1
+      dockerfile: Dockerfile
+    container_name: codingdemo-ky1
+    ports:
+      - "3005:80"
+    restart: unless-stopped
+    networks:
+      - codingdemo-network
+
+  # Kỳ 2: IELTS Writing Practice (React)
+  ky2-ielts:
+    build:
+      context: ./ky2
+      dockerfile: Dockerfile
+    container_name: codingdemo-ky2
+    ports:
+      - "3006:80"
+    restart: unless-stopped
+    networks:
+      - codingdemo-network
+
+  # Kỳ 3: Expense Tracker Backend
+  ky3-backend:
+    build:
+      context: ./ky3/backend
+      dockerfile: Dockerfile
+    container_name: codingdemo-ky3-backend
+    ports:
+      - "3008:3008"
+    environment:
+      - PORT=3008
+      - MONGODB_URI=${MONGODB_URI:-mongodb://mongodb:27017/expense-tracker}
+      - JWT_SECRET=${JWT_SECRET}
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+    volumes:
+      - ./ky3/backend/uploads:/app/uploads
+    depends_on:
+      - mongodb
+    restart: unless-stopped
+    networks:
+      - codingdemo-network
+
+  # Kỳ 3: Expense Tracker Frontend
+  ky3-frontend:
+    build:
+      context: ./ky3/frontend
+      dockerfile: Dockerfile
+      args:
+        - VITE_API_URL=http://31.97.109.177:3008/api
+    container_name: codingdemo-ky3-frontend
+    ports:
+      - "3007:80"
+    restart: unless-stopped
+    networks:
+      - codingdemo-network
+
+  # MongoDB for Kỳ 3
+  mongodb:
+    image: mongo:7
+    container_name: codingdemo-mongodb
+    ports:
+      - "27018:27017"
+    volumes:
+      - mongodb-data:/data/db
+    restart: unless-stopped
+    networks:
+      - codingdemo-network
+
+networks:
+  codingdemo-network:
+    driver: bridge
+
+volumes:
+  mongodb-data:
+
